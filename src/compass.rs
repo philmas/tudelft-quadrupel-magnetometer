@@ -37,10 +37,10 @@ pub(crate) fn initialize() {
     // Safety: The TWI mutex are not accessed in an interrupt
     let twi = unsafe { TWI.no_critical_section_lock_mut() };
 
-    twi.write(MAGNETOMETER_ADDR, REG_CR_A, &[]); // Send a "write" command to move the address pointer to register 0x00
-    twi.write(MAGNETOMETER_ADDR, REG_CR_A, &[0x70]); // 8 samples averaged, 15 Hz output
-    twi.write(MAGNETOMETER_ADDR, REG_CR_B, &[0x20]); // 1.3 gain
-    twi.write(MAGNETOMETER_ADDR, REG_MR, &[0x00]); // Continuous measurement mode
+    // twi.write(MAGNETOMETER_ADDR, REG_CR_A, &[]); // Send a "write" command to move the address pointer to register 0x00
+    // twi.write(MAGNETOMETER_ADDR, REG_CR_A, &[0x70]); // 8 samples averaged, 15 Hz output
+    // twi.write(MAGNETOMETER_ADDR, REG_CR_B, &[0x20]); // 1.3 gain
+    // twi.write(MAGNETOMETER_ADDR, REG_MR, &[0x00]); // Continuous measurement mode
 
     MAGNETOMETER.modify(|compass| {
         compass.initialize(Hmc5883l {
