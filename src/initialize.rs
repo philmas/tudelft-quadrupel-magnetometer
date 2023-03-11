@@ -30,8 +30,7 @@ static ALLOCATOR: CortexMHeap = CortexMHeap::empty();
 pub fn initialize(heap_memory: &'static mut [MaybeUninit<u8>], debug: bool) {
     // Allow time for PC to start up. The drone board starts running code immediately after upload,
     // but at that time the PC may not be listening on UART etc.
-    // assembly_delay(2_500_000);
-    assembly_delay(4_500_000);
+    assembly_delay(2_500_000);
 
     // keep this guard around until the end of the function (so interrupts stay off)
     INITIALIZED.modify(|guard| {
@@ -77,7 +76,7 @@ pub fn initialize(heap_memory: &'static mut [MaybeUninit<u8>], debug: bool) {
     if debug {
         let _ = send_bytes(b"MPU driver initialized\n");
     }
-    compass::initialize();
+    // compass::initialize();
     if debug {
         let _ = send_bytes(b"Compass driver initialized\n");
     }
