@@ -51,32 +51,32 @@ pub(crate) fn initialize() {
     // });
 }
 
-fn update() {
-    // Safety: The TWI and BAROMETER mutexes are not accessed in an interrupt
-    let twi = unsafe { TWI.no_critical_section_lock_mut() };
-    let compass = unsafe { MAGNETOMETER.no_critical_section_lock_mut() };
+// fn update() {
+//     // Safety: The TWI and BAROMETER mutexes are not accessed in an interrupt
+//     let twi = unsafe { TWI.no_critical_section_lock_mut() };
+//     let compass = unsafe { MAGNETOMETER.no_critical_section_lock_mut() };
 
-    let now = Instant::now();
+//     let now = Instant::now();
 
-    if now.duration_since(compass.last_measurement_time) < Duration::from_millis(100) {
-        return;
-    }
+//     if now.duration_since(compass.last_measurement_time) < Duration::from_millis(100) {
+//         return;
+//     }
 
-    compass.last_measurement_time = now;
+//     compass.last_measurement_time = now;
 
-    let mut data = [0u8; 6];
-    _ = twi.read(MAGNETOMETER_ADDR, REG_OUT_X_H, &mut data); // Read all 6 registers at once
+//     let mut data = [0u8; 6];
+//     _ = twi.read(MAGNETOMETER_ADDR, REG_OUT_X_H, &mut data); // Read all 6 registers at once
 
-    compass.x = ((data[0] as i16) << 8) | data[1] as i16;
-    compass.z = ((data[2] as i16) << 8) | data[3] as i16;
-    compass.y = ((data[4] as i16) << 8) | data[5] as i16;
-}
+//     compass.x = ((data[0] as i16) << 8) | data[1] as i16;
+//     compass.z = ((data[2] as i16) << 8) | data[3] as i16;
+//     compass.y = ((data[4] as i16) << 8) | data[5] as i16;
+// }
 
-/// Read the compass field in the x, y, and z directions.
-pub fn read_field() -> [i16; 3] {
-    update();
+// /// Read the compass field in the x, y, and z directions.
+// pub fn read_field() -> [i16; 3] {
+//     update();
 
-    let compass = unsafe { MAGNETOMETER.no_critical_section_lock_mut() };
+//     let compass = unsafe { MAGNETOMETER.no_critical_section_lock_mut() };
 
-    [compass.x, compass.y, compass.z]
-}
+//     [compass.x, compass.y, compass.z]
+// }
