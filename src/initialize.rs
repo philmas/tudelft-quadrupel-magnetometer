@@ -2,7 +2,7 @@ use crate::led::Led::Yellow;
 use crate::mutex::Mutex;
 use crate::time::assembly_delay;
 use crate::uart::send_bytes;
-use crate::{barometer, battery, compass, flash, led, motor, mpu, time, twi, uart};
+use crate::{barometer, battery, flash, led, motor, mpu, time, twi, uart};
 use alloc_cortex_m::CortexMHeap;
 use core::mem::MaybeUninit;
 use nrf51_pac::Peripherals;
