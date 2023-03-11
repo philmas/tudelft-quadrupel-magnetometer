@@ -44,12 +44,11 @@ pub use ringbuffer;
 /// Utilities to read out the barometer
 pub mod barometer;
 
-/// Utilities to read out the magnetometer
-pub mod compass;
-
 /// Utilities to read out the battery voltage. You may see
 /// this referred to as the "ADC" (analog to digital converter).
 pub mod battery;
+/// Utilities to read out the magnetometer
+pub mod compass;
 
 /// Utilities to read from and write to the flash chip
 pub mod flash;
