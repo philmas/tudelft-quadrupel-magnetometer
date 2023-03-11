@@ -28,7 +28,6 @@ struct Hmc5883l {
     x: i16,
     y: i16,
     z: i16,
-    last_measurement_time: Instant,
 }
 
 static MAGNETOMETER: Mutex<OnceCell<Hmc5883l>> = Mutex::new(OnceCell::uninitialized());

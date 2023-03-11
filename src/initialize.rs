@@ -76,10 +76,10 @@ pub fn initialize(heap_memory: &'static mut [MaybeUninit<u8>], debug: bool) {
     if debug {
         let _ = send_bytes(b"MPU driver initialized\n");
     }
-    // compass::initialize();
-    // if debug {
-    //     let _ = send_bytes(b"Compass driver initialized\n");
-    // }
+    compass::initialize();
+    if debug {
+        let _ = send_bytes(b"Compass driver initialized\n");
+    }
     barometer::initialize();
     if debug {
         let _ = send_bytes(b"Barometer driver initialized\n");
