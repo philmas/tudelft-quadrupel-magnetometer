@@ -28,6 +28,7 @@ struct Hmc5883l {
     x: i16,
     y: i16,
     z: i16,
+    last_measurement_time: Instant,
 }
 
 static MAGNETOMETER: Mutex<OnceCell<Hmc5883l>> = Mutex::new(OnceCell::uninitialized());
@@ -41,10 +42,13 @@ pub(crate) fn initialize() {
     // twi.write(MAGNETOMETER_ADDR, REG_CR_B, &[0x20]); // 1.3 gain
     // twi.write(MAGNETOMETER_ADDR, REG_MR, &[0x00]); // Continuous measurement mode
 
-    // Read the PROM values from the chip
-
     MAGNETOMETER.modify(|compass| {
-        compass.initialize(Hmc5883l { x: 0, y: 0, z: 0 });
+        compass.initialize(Hmc5883l {
+            x: 0,
+            y: 0,
+            z: 0,
+            last_measurement_time: Instant::now(),
+        });
     });
 }
 
