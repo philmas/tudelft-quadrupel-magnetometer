@@ -48,7 +48,7 @@ pub mod barometer;
 /// this referred to as the "ADC" (analog to digital converter).
 pub mod battery;
 /// Utilities to read out the magnetometer
-// pub mod compass;
+pub mod compass;
 
 /// Utilities to read from and write to the flash chip
 pub mod flash;
