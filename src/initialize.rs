@@ -76,6 +76,10 @@ pub fn initialize(heap_memory: &'static mut [MaybeUninit<u8>], debug: bool) {
     if debug {
         let _ = send_bytes(b"MPU driver initialized\n");
     }
+    // compass::initialize();
+    // if debug {
+    //     let _ = send_bytes(b"Compass driver initialized\n");
+    // }
     barometer::initialize();
     if debug {
         let _ = send_bytes(b"Barometer driver initialized\n");
@@ -84,10 +88,7 @@ pub fn initialize(heap_memory: &'static mut [MaybeUninit<u8>], debug: bool) {
     if debug {
         let _ = send_bytes(b"Battery driver initialized\n");
     }
-    compass::initialize();
-    if debug {
-        let _ = send_bytes(b"Compass driver initialized\n");
-    }
+
     flash::initialize(
         nrf51_peripherals.SPI1,
         gpio.p0_17,
