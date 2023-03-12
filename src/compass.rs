@@ -59,7 +59,7 @@ fn update() {
 
     let now = Instant::now();
 
-    if now.duration_since(compass.last_measurement_time) < Duration::from_millis(100) {
+    if now - compass.last_measurement_time < Duration::from_millis(100) {
         return;
     }
 
